@@ -1,4 +1,4 @@
-package br.com.sistemamedico.medico;
+package br.com.sistemamedico.medico.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,16 +15,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Medico {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idMedico;
+    private Integer idCliente;
 
     @Column(nullable = false, length = 30)
-    private String nomeMedico;
+    private String nomeCliente;
 
-    @Column(nullable = false, length = 20)
-    private String especialidadeMedico;
+    @Column(nullable = false, length = 30)
+    private String enderecoCliente;
 
-    private Integer crmMedico;
+    @Column(nullable = false, length = 11)
+    private String telefoneCliente;
+
+    
 }
