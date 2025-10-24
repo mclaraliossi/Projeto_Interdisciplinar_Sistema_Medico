@@ -1,8 +1,11 @@
 package br.com.sistemamedico.medico.controller;
 
-import org.hibernate.mapping.List;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.sistemamedico.medico.entity.Medico;
 import br.com.sistemamedico.medico.service.MedicoService;
-import ch.qos.logback.core.model.Model;
 
 @Controller
 @RequestMapping("/medicos")
@@ -22,7 +24,7 @@ public class MedicoController {
 
     @GetMapping("/listar")
     public String Listar(Model model){
-        List<Medico> categorias = service.findAll();
+        List<Medico> medicos = service.findAll();
         model.addAttribute("medicos", medicos);
         return "medico/medicoListar";
     }
