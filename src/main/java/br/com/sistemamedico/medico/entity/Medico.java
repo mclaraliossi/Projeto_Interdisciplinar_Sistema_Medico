@@ -16,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Medico {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idMedico;

@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Consulta {
@@ -30,12 +30,11 @@ public class Consulta {
     private String observacoesConsulta;
     
     @ManyToOne
-    @JoinColumn(name = idMedico)
+    @JoinColumn(name = "idMedico_fk")
     private Medico medico;
 
     @ManyToOne
-    @JoinColumn(name = idCliente)
+    @JoinColumn(name = "idCliente_fk")
     private Cliente cliente;
-
 
 }

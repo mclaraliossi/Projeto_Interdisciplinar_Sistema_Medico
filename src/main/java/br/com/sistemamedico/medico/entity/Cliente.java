@@ -16,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idCliente;
