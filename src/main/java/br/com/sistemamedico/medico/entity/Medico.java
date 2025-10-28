@@ -1,10 +1,13 @@
 package br.com.sistemamedico.medico.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +31,7 @@ public class Medico {
     private String especialidadeMedico;
 
     private Integer crmMedico;
+
+    @OneToMany(mappedBy = "medico")
+    private List<Consulta> consultas;
 }
