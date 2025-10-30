@@ -13,15 +13,47 @@
         <br>
 
         <label for="dataehoraConsulta"></label>
-        <input type="date" name="dataehoraConsulta" th:field="*{dataehoraConsulta}" placeholder="Data e Hora"/>
+        <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}" placeholder="Data e Hora"/>
         <br>
 
         <label for="observacoesConsulta"></label>
         <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder="Observação"/>
         <br>
 
+        <label>Especialidade:</label>
+            <select th:field="*{medico}" required>
+                <option value="">-- Selecione --</option>
+                <option th:each="cat : ${medicos}" 
+                        th:value="${cat.idMedico}" 
+                        th:text="${cat.especialidadeMedico}">
+                </option>
+            </select>
+        <br>
+
+        <label>Médico:</label>
+            <select th:field="*{medico}" required>
+                <option value="">-- Selecione --</option>
+                <option th:each="cat : ${medicos}" 
+                        th:value="${cat.idMedico}" 
+                        th:text="${cat.nomeMedico}">
+                </option>
+            </select>
+        <br>
+
+        <label>Cliente:</label>
+            <select th:field="*{cliente}" required>
+                <option value="">-- Selecione --</option>
+                <option th:each="cat : ${clientes}" 
+                        th:value="${cat.idCliente}" 
+                        th:text="${cat.nomeCliente}">
+                </option>
+            </select>
+
         <input type="submit" value="salvar"/>
     </form>
+
+    <h3><a href="/medico">Voltar</a></h3>
+
 <!-- <th>Data</th>
     <th>Observação</th>
     <th>Ações</th>-->

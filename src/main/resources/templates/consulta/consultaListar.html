@@ -12,11 +12,14 @@
     <table border="1" align="center" id="custumer">
       <thead id="tabelahead">
         <tr>
-          <td colspan="3" align="center">Lista de Consultas</td>
+          <td colspan="6" align="center">Lista de Consultas</td>
         </tr>
         <tr>
           <th>Data</th>
           <th>Observação</th>
+          <th>Especialidade</th>
+          <th>Médico</th>
+          <th>Paciente</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -24,16 +27,20 @@
         <tr th:each="consulta: ${consultas}">
           <td th:text="${consulta.dataehoraConsulta}"></td>
           <td th:text="${consulta.observacoesConsulta}"></td>
+          <td th:text="${consulta.medico != null ? consulta.medico.especialidadeMedico : 'Sem Especialidade'}"></td>
+          <td th:text="${consulta.medico != null ? consulta.medico.nomeMedico : 'Sem nome do Médico'}"></td>
+          <td th:text="${consulta.cliente != null ? consulta.cliente.nomeCliente : 'Sem Paciente'}"></td>
+
           <td>
             <a th:href="@{/consultas/editar/{id}(id=${consulta.idConsulta})}">Editar</a>
             <a th:href="@{/consultas/excluir/{id}(id=${consulta.idConsulta})}">Excluir</a>
           </td>
-          <td th:text="${consulta.medico != null ? consulta.medico.especialidadeMedico : 'Sem Especialidade'}"></td>
-          <td th:text="${consulta.medico != null ? consulta.medico.nomeMedico : 'Sem nome do Médico'}"></td>
-          <td th:text="${consulta.cliente != null ? consulta.cliente.nomeCliente : 'Sem paciente'}"></td>
         </tr>
       </tbody>
     </table>
+
+    <h3><a href="/medico">Voltar</a></h3>
+
 <!--  @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idConsulta;
 
