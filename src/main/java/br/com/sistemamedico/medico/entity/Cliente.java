@@ -28,7 +28,22 @@ public class Cliente {
     private String nomeCliente;
 
     @Column(nullable = false, length = 30)
-    private String enderecoCliente;
+    private String ruaCliente;
+
+    @Column(nullable = false, length = 30)
+    private String bairroCliente;
+
+    @Column(nullable = false, length = 30)
+    private String numeroCliente;
+
+    @Column(nullable = false, length = 30)
+    private String estadoCliente;
+
+    @Column(nullable = false, length = 30)
+    private String cidadeCliente;
+
+    @Column(nullable = false, length = 30)
+    private String cepCliente;
 
     @Column(nullable = false, length = 11)
     private String telefoneCliente;
