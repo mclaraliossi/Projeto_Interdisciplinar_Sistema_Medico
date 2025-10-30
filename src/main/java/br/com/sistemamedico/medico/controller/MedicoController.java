@@ -38,7 +38,7 @@ public class MedicoController {
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Medico medico){
         service.save(medico);
-        return "redirect:/medico/listar";
+        return "redirect:/medicos/listar";
     }
 
     @GetMapping("/editar/{id}")
