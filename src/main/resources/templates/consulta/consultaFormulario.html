@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Consultas</title>
+</head>
+<body>
+    <h1>Cadastro de Consultas</h1>
+    <form th:action="@{/consultas/salvar}" method="POST" th:object="${consulta}">
+
+        <input type="hidden" name="idConsulta" th:field="*{idConsulta}" readonly/>
+        <br>
+
+        <label for="dataehoraConsulta"></label>
+        <input type="datetime" name="dataehoraConsulta" th:field="*{dataehoraConsulta}" placeholder="Data e Hora"/>
+        <br>
+
+        <label for="observacoesConsulta"></label>
+        <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder="Observação"/>
+        <br>
+
+        <input type="submit" value="salvar"/>
+    </form>
+<!-- <th>Data</th>
+    <th>Observação</th>
+    <th>Ações</th>-->
+</body>
+</html>
