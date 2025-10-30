@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Consultas</title>
+</head>
+<body>
+    <h2><a href="/consultas/criar">Cadastrar Consulta</a></h2>
+  
+    <br>
+    <table border="1" align="center" id="custumer">
+      <thead id="tabelahead">
+        <tr>
+          <td colspan="3" align="center">Lista de Consultas</td>
+        </tr>
+        <tr>
+          <th>Data</th>
+          <th>Observação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelabody">
+        <tr th:each="consulta: ${consultas}">
+          <td th:text="${consulta.dataehoraConsulta}"></td>
+          <td th:text="${consulta.observacoesConsulta}"></td>
+          <td>
+            <a th:href="@{/consultas/editar/{id}(id=${consulta.idConsulta})}">Editar</a>
+            <a th:href="@{/consultas/excluir/{id}(id=${consulta.idConsulta})}">Excluir</a>
+          </td>
+          <td th:text="${consulta.medico != null ? consulta.medico.especialidadeMedico : 'Sem Especialidade'}"></td>
+          <td th:text="${consulta.medico != null ? consulta.medico.nomeMedico : 'Sem nome do Médico'}"></td>
+          <td th:text="${consulta.cliente != null ? consulta.cliente.nomeCliente : 'Sem paciente'}"></td>
+        </tr>
+      </tbody>
+    </table>
+<!--  @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idConsulta;
+
+    private LocalDateTime dataehoraConsulta;
+
+    @Column(nullable = false, length = 50)
+    private String observacoesConsulta;-->
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pacientes</title>
+</head>
+<body>
+    <h2><a href="/clientes/criar">Cadastrar Pacientes</a></h2>
+  
+    <br>
+    <table border="1" align="center" id="custumer">
+      <thead id="tabelahead">
+        <tr>
+          <td colspan="10" align="center">Lista de Pacientes</td>
+        </tr>
+        <tr>
+          <th>Nome </th>
+          <th>Estado</th>
+          <th>Cidade</th>
+          <th>Cep</th>
+          <th>Rua</th>
+          <th>Numero</th>
+          <th>Bairro</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelabody">
+        <tr th:each="cliente: ${clientes}">
+          <td th:text="${cliente.nomeCliente}"></td>
+          <td th:text="${cliente.estadoCliente}"></td>
+          <td th:text="${cliente.cidadeCliente}"></td>
+          <td th:text="${cliente.cepCliente}"></td>
+          <td th:text="${cliente.ruaCliente}"></td>
+          <td th:text="${cliente.numeroCliente}"></td>
+          <td th:text="${cliente.bairroCliente}"></td>
+          <td th:text="${cliente.telefoneCliente}"></td>
+          <td>
+            <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}">Editar</a>
+            <a th:href="@{/clientes/excluir/{id}(id=${cliente.idCliente})}">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+<!-- private Integer idCliente;
+
+    @Column(nullable = false, length = 30)
+    private String nomeCliente;
+
+    @Column(nullable = false, length = 30)
+    private String enderecoCliente;
+
+    @Column(nullable = false, length = 11)
+    private String telefoneCliente;-->
+</body>
+</html>

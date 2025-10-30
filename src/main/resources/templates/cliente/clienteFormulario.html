@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pacientes</title>
+</head>
+<body>
+    <h1>Cadastro de Pacientes</h1>
+    <form th:action="@{/clientes/salvar}" method="POST" th:object="${cliente}">
+
+        <input type="hidden" name="idCliente" th:field="*{idCliente}" readonly/>
+        <br>
+
+        <label for="nomeCliente"></label>
+        <input type="text" name="nomeCliente" th:field="*{nomeCliente}" placeholder="Nome do Cliente"/>
+        <br>
+
+        <label for="estadoCliente"></label>
+        <input type="text" name="estadoCliente" th:field="*{estadoCliente}" placeholder="Estado"/>
+        <br>
+
+        <label for="cidadeCliente"></label>
+        <input type="text" name="cidadeCliente" th:field="*{cidadeCliente}" placeholder="Cidade"/>
+        <br>
+
+        <label for="cepCliente"></label>
+        <input type="number" name="cepCliente" th:field="*{cepCliente}" placeholder="Cep"/>
+        <br>
+
+        <label for="ruaCliente"></label>
+        <input type="text" name="cidadeCliente" th:field="*{cidadeCliente}" placeholder="Cidade"/>
+        <br>
+
+        <label for="cidadeCliente"></label>
+        <input type="text" name="ruaCliente" th:field="*{ruaCliente}" placeholder="Rua"/>
+        <br>
+
+        <label for="numeroCliente"></label>
+        <input type="text" name="numeroCliente" th:field="*{numeroCliente}" placeholder="Numero"/>
+        <br>
+
+        <label for="bairroCliente"></label>
+        <input type="text" name="bairroCliente" th:field="*{bairroCliente}" placeholder="Bairro"/>
+        <br>
+
+        <label for="telefoneCliente"></label>
+        <input type="tel" name="telefoneCliente" th:field="*{telefoneCliente}" placeholder="Telefone"/>
+        <br>
+
+        <input type="submit" value="salvar"/>
+    </form>
+
+<!--<th>Nome </th>
+    <th>Estado</th>
+    <th>Cidade</th>
+    <th>Cep</th>
+    <th>Rua</th>
+    <th>Numero</th>
+    <th>Bairro</th>
+    <th>Telefone</th>
+    <th>Ações</th>-->
+</body>
+</html>
