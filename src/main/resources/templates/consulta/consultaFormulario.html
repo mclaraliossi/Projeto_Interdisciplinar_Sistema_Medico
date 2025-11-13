@@ -1,67 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Consultas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    
+            <style>
+        body {
+            background-color: #A3D9D3;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            display: flex;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 900px;
+            max-width: 95%;
+        }
+
+        /* Informaçãoes */
+        .left-side {
+            background-color: #ffffff;
+            width: 40%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-pic-container label {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .profile-pic-container:hover .upload-btn {
+            opacity: 1;
+        }
+
+
+        .left-side h4 {
+            color: #7ABFBF;
+            margin-bottom: 15px;
+        }
+
+        .left-side p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Formulario */
+        .container-fluid {
+            display: column;
+            width: 60%;
+            padding: 50px;
+        }
+
+        .container-fluid h1 {
+            color: #7ABFBF;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-control {
+            color: #7ABFBF;
+            border: none;
+            border-bottom: 1px solid #7ABFBF;
+            border-radius: 0;
+            box-shadow: none;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-control input {
+            width: 100%;
+            padding: 10px 5px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 16px;
+        }
+
+        .form-control select {
+            width: 100%;
+            padding: 10px 5px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 16px;
+        }
+
+        .form-control label {
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-size: 16px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .form-control input:focus~label,
+        .form-control input:not(:placeholder-shown)~label {
+            top: -8px;
+            left: 5px;
+            padding: 0 4px;
+        }
+
+        .form-control input:focus~select,
+        .form-control input:not(:placeholder-shown)~select {
+            top: -8px;
+            left: 5px;
+            padding: 0 4px;
+        }
+
+        .form-control:focus {
+            border-color: #7ABFBF;
+            box-shadow: none;
+        }
+
+        .btn {
+            background-color: #7ABFBF;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 100%;
+            font-weight: 600;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #D9D9D9;
+            color: white;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-link a {
+            color: #7ABFBF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
 </head>
+
 <body>
-    <h1>Cadastro de Consultas</h1>
-    <form th:action="@{/consultas/salvar}" method="POST" th:object="${consulta}">
+    <div class="container">
+        <!-- Informações do lado -->
+        <div class="left-side">
+            <p>
+                Preencha as informações ao lado para registrar uma novo consulta no sistema.
+            </p>
+            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
+        </div>
 
-        <input type="hidden" name="idConsulta" th:field="*{idConsulta}" readonly/>
-        <br>
+        <!-- Formulario -->
+        <div class="container-fluid">
+        <h1><i class="bi bi-calendar-heart-fill"></i>Cadastro de Consultas</h1>
+            <form th:action="@{/consultas/salvar}" method="POST" th:object="${consulta}">
 
-        <label for="dataehoraConsulta"></label>
-        <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}" placeholder="Data e Hora"/>
-        <br>
+                <input type="hidden" name="idConsulta" th:field="*{idConsulta}" readonly />
 
-        <label for="observacoesConsulta"></label>
-        <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder="Observação"/>
-        <br>
+                <div class="form-control">
+                    <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}"
+                        placeholder=" " required />
+                    <label for="dataehoraConsulta">Data e Hora</label>
+                </div>
 
-        <label>Especialidade:</label>
-            <select th:field="*{medico}" required>
-                <option value="">-- Selecione --</option>
-                <option th:each="cat : ${medicos}" 
-                        th:value="${cat.idMedico}" 
-                        th:text="${cat.especialidadeMedico}">
-                </option>
-            </select>
-        <br>
+                <div class="form-control">
+                    <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}"
+                        placeholder=" " required />
+                    <label for="observacoesConsulta">Observação</label>
+                </div>
+                <br>
 
-        <label>Médico:</label>
-            <select th:field="*{medico}" required>
-                <option value="">-- Selecione --</option>
-                <option th:each="cat : ${medicos}" 
-                        th:value="${cat.idMedico}" 
-                        th:text="${cat.nomeMedico}">
-                </option>
-            </select>
-        <br>
+                <div class="form-control">
+                    <select th:field="*{medico}" required>
+                        <option value="">-- Selecione --</option>
+                        <option th:each="cat : ${medicos}" th:value="${cat.idMedico}"
+                            th:text="${cat.especialidadeMedico}">
+                        </option>
+                    </select>
+                    <label>Especialidade</label>
+                </div>
 
-        <label>Cliente:</label>
-            <select th:field="*{cliente}" required>
-                <option value="">-- Selecione --</option>
-                <option th:each="cat : ${clientes}" 
-                        th:value="${cat.idCliente}" 
-                        th:text="${cat.nomeCliente}">
-                </option>
-            </select>
+                <div class="form-control">
+                    <select th:field="*{cliente}" required>
+                        <option value="">-- Selecione --</option>
+                        <option th:each="cat : ${clientes}" th:value="${cat.idCliente}" th:text="${cat.nomeCliente}">
+                        </option>
+                    </select>
+                    <label>Paciente</label>
+                </div>
 
-        <input type="submit" value="salvar"/>
-    </form>
+                <div class="form-control">
+                    <select th:field="*{medico}" required>
+                        <option value="">-- Selecione --</option>
+                        <option th:each="cat : ${medicos}" th:value="${cat.idMedico}" th:text="${cat.nomeMedico}">
+                        </option>
+                    </select>
+                    <label>Médico</label>
+                </div>
 
-    <h3><a href="/medico">Voltar</a></h3>
+                <button type="submit" value="salvar" class="btn">Salvar</button>
+
+                <div class="back-link">
+                    <a href="/medico">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-    
-<!-- <th>Data</th>
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <!-- <th>Data</th>
     <th>Observação</th>
     <th>Ações</th>-->
 </body>
+
 </html>

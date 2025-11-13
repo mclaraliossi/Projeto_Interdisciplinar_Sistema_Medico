@@ -1,43 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de Médico</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #A3D9D3;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            display: flex;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 900px;
+            max-width: 95%;
+
+        }
+
+        /* Informaçãoes */
+        .left-side {
+            background-color: #ffffff;
+            width: 40%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* imagem de perfil */
+        .profile-pic-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #7ABFBF;;
+            cursor: pointer;
+        }
+
+        #profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-pic-container label {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .profile-pic-container:hover .upload-btn {
+            opacity: 1;
+        }
+
+
+        .left-side h4 {
+            color: #7ABFBF;
+            margin-bottom: 15px;
+        }
+
+        .left-side p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Formulario */
+        .right-side {
+            width: 60%;
+            padding: 50px;
+        }
+
+        .right-side h1 {
+            color: #7ABFBF;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-control {
+            color: #7ABFBF;
+            border: none;
+            border-bottom: 1px solid #7ABFBF;
+            border-radius: 0;
+            box-shadow: none;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-control input {
+            width: 100%;
+            padding: 10px 5px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 16px;
+        }
+
+        .form-control label {
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-size: 16px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .form-control input:focus~label,
+        .form-control input:not(:placeholder-shown)~label {
+            top: -8px;
+            left: 5px;
+            padding: 0 4px;
+        }
+
+        .form-control:focus {
+            border-color: #7ABFBF;
+            box-shadow: none;
+        }
+
+        .btn {
+            background-color: #7ABFBF;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 100%;
+            font-weight: 600;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .btn:hover {
+            color: white;
+            background-color: #D9D9D9;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-link a {
+            color: #7ABFBF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-      <h1>Cadastro de Médico</h1>
-    <form th:action="@{/medicos/salvar}" method="POST" th:object="${medico}">
+    <div class="container">
+        <!-- Imagem do lado -->
+        <div class="left-side">
+            <div class="profile-pic-container">
+                <img src="placeholder.png" alt="Foto de Perfil" id="profile-pic">
+                <input type="file" id="file-input" accept="image/*">
+                <label for="file-input" class="upload-btn">Escolher Imagem</label>
+            </div>
+            <h4>Foto de perfil</h4>
+            <p>
+                Preencha as informações ao lado para registrar um novo profissional de
+                saúde no sistema.
+            </p>
+        </div>
 
-        <input type="hidden" name="idMedico" th:field="*{idMedico}" readonly/>
-        <br>
+        <!-- Formulario -->
+        <div class="right-side">
+            <h1>Registrar Médico</h1>
+            <form th:action="@{/medicos/salvar}" method="POST" th:object="${medico}">
+                <input type="hidden" name="idMedico" th:field="*{idMedico}" readonly />
 
-        <label for="nomeMedico"></label>
-        <input type="text" name="nomeMedico" th:field="*{nomeMedico}" placeholder="Nome do Médico"/>
-        <br>
+                <div class="form-control">
+                    <input type="text" name="nomeMedico" th:field="*{nomeMedico}" placeholder=" " required />
+                    <label for="nomeMedico">Nome do Médico</label>
+                </div>
 
-        <label for="especialidadeMedico"></label>
-        <input type="text" name="especialidadeMedico" th:field="*{especialidadeMedico}" placeholder="Especialidade"/>
-        <br>
+                <div class="form-control">
+                    <input type="text" name="especialidadeMedico" th:field="*{especialidadeMedico}" placeholder=" "
+                        required />
+                    <label for="especialidadeMedico">Especialidade</label>
+                </div>
 
-        <label for="crmMedico"></label>
-        <input type="number" name="crmMedico" th:field="*{crmMedico}" placeholder="CRM"/>
-        <br>
+                <div class="form-control">
+                    <input type="number" name="crmMedico" th:field="*{crmMedico}" placeholder=" " required />
+                    <label for="crmMedico">CRM</label>
+                </div>
 
-        <input type="submit" value="salvar"/>
-    </form>
+                <button type="submit" value="salvar" class="btn">Salvar</button>
 
-    <h3><a href="/medico">Voltar</a></h3>
-    
+                <div class="back-link">
+                    <a href="/medico">Voltar</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous">
+    
+    const fileInput = document.getElementById('file-input');
+    const profilePic = document.getElementById('profile-pic');
 
-<!--<th>Nome</th>
-    <th>Especialidade</th>
-    <th>CRM</th>
-    <th>Ações</th>-->  
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0]; // Pega o primeiro arquivo selecionado
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader(); // Cria um leitor de arquivos
+
+            reader.onload = function(e) {
+                // Quando o arquivo for lido, define o src da imagem como o resultado (URL dos dados)
+                profilePic.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados (Data URL)
+        }
+    });
+
+    </script>
 </body>
+
 </html>
