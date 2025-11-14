@@ -8,8 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
-            <style>
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let erro = /*[[${erro}]]*/ null;
+
+            if (erro !== null) {
+                let modal = new bootstrap.Modal(document.getElementById('erroModal'));
+                modal.show();
+            }
+        });
+    </script>
+
+    <style>
         body {
             background-color: #A3D9D3;
             font-family: "Poppins", sans-serif;
@@ -172,12 +182,13 @@
             <p>
                 Preencha as informações ao lado para registrar uma novo consulta no sistema.
             </p>
-            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
+            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png"
+                alt="">
         </div>
 
         <!-- Formulario -->
         <div class="container-fluid">
-        <h1><i class="bi bi-calendar-heart-fill"></i>Cadastro de Consultas</h1>
+            <h1><i class="bi bi-calendar-heart-fill"></i>Cadastro de Consultas</h1>
             <form th:action="@{/consultas/salvar}" method="POST" th:object="${consulta}">
 
                 <input type="hidden" name="idConsulta" th:field="*{idConsulta}" readonly />
@@ -189,8 +200,8 @@
                 </div>
 
                 <div class="form-control">
-                    <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}"
-                        placeholder=" " required />
+                    <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder=" "
+                        required />
                     <label for="observacoesConsulta">Observação</label>
                 </div>
                 <br>
@@ -232,13 +243,33 @@
         </div>
     </div>
 
+    <!-- Mensagem de erro pro usuário -->
+
+    <div class="modal fade" id="erroModal" tabindex="-1" aria-labelledby="erroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="erroModalLabel">Erro na Consulta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p th:text="${erro}"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <!-- <th>Data</th>
-    <th>Observação</th>
-    <th>Ações</th>-->
 </body>
 
 </html>

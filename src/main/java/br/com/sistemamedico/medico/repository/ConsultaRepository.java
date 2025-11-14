@@ -1,9 +1,18 @@
 package br.com.sistemamedico.medico.repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.sistemamedico.medico.entity.Consulta;
 
 public interface ConsultaRepository extends JpaRepository<Consulta, Integer> {
     
+        boolean existsByMedicoIdMedicoAndDataehoraConsulta(Integer idMedico, LocalDateTime dataehoraConsulta);
+
+        boolean existsByClienteIdClienteAndDataehoraConsulta(Integer idCliente, LocalDateTime dataehoraConsulta);
+
+        List<Consulta> findByMedicoIdMedico(Integer idMedico);
+
 }

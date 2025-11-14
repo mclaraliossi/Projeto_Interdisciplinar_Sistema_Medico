@@ -45,9 +45,22 @@ public class ConsultaController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Consulta consulta){
-        service.save(consulta);
-        return "redirect:/consultas/listar";
+    public String salvar(@ModelAttribute Consulta consulta, Model model){
+        try {
+            service.save(consulta);
+            return "redirect:/consultas/listar";
+    
+        } catch (IllegalArgumentException e) {
+    
+            model.addAttribute("erro", e.getMessage());
+    
+            // Recarregar as listas do formulário
+            model.addAttribute("medicos", medicoService.findAll());
+            model.addAttribute("clientes", clienteService.findAll());
+            model.addAttribute("consulta", consulta);
+    
+            return "consulta/consultaFormulario";
+        }
     }
 
     @GetMapping("/editar/{id}")
