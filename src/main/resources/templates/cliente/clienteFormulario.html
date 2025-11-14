@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de Pacientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <style>
         body {
@@ -41,7 +42,7 @@
             text-align: center;
         }
 
-        /* imagem de perfil */
+        /* Foto de perfil */
         .profile-pic-container {
             position: relative;
             width: 150px;
@@ -154,6 +155,7 @@
             box-shadow: none;
         }
 
+        /* Botão Salvar */
         .btn {
             background-color: #7ABFBF;
             border: none;
@@ -170,6 +172,7 @@
             color: white;
         }
 
+        /* O link Voltar */
         .back-link {
             text-align: center;
             margin-top: 15px;
@@ -205,46 +208,54 @@
 
         <!-- Formulario -->
         <div class="container-fluid">
-            <h1>Cadastro de Pacientes</h1>
+            <h1><i class="bi bi-person-fill">Cadastro de Pacientes</i></h1>
             <form th:action="@{/clientes/salvar}" method="POST" th:object="${cliente}">
 
                 <input type="hidden" name="idCliente" th:field="*{idCliente}" readonly />
 
+                <!-- Nome do Cliente -->
                 <div class="form-control">
                     <input type="text" name="nomeCliente" th:field="*{nomeCliente}" placeholder=" " required />
                     <label for="nomeCliente">Nome do Cliente</label>
                 </div>
 
+                <!-- Estado -->
                 <div class="form-control">
                     <input type="text" name="estadoCliente" th:field="*{estadoCliente}" placeholder=" " required />
                     <label for="estadoCliente">Estado</label>
                 </div>
 
+                <!-- Cidade -->
                 <div class="form-control">
                     <input type="text" name="cidadeCliente" th:field="*{cidadeCliente}" placeholder=" " required />
                     <label for="cidadeCliente">Cidade</label>
                 </div>
 
+                <!-- Cep -->
                 <div class="form-control">
                     <input type="number" name="cepCliente" th:field="*{cepCliente}" placeholder=" " required />
                     <label for="cepCliente">Cep</label>
                 </div>
 
+                <!-- Rua -->
                 <div class="form-control">
                     <input type="text" name="ruaCliente" th:field="*{ruaCliente}" placeholder=" " required />
                     <label for="ruaCliente">Rua</label>
                 </div>
 
+                <!-- Numero -->
                 <div class="form-control">
                     <input type="text" name="numeroCliente" th:field="*{numeroCliente}" placeholder=" " required />
                     <label for="numeroCliente">Número</label>
                 </div>
 
+                <!-- Bairro -->
                 <div class="form-control">
                     <input type="text" name="bairroCliente" th:field="*{bairroCliente}" placeholder=" " required />
                     <label for="bairroCliente">Bairro</label>
                 </div>
 
+                <!-- Telefone -->
                 <div class="form-control">
                     <input type="tel" name="telefoneCliente" th:field="*{telefoneCliente}" placeholder=" " required />
                     <label for="telefoneCliente">Telefone</label>

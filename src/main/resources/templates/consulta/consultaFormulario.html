@@ -18,6 +18,8 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            margin-top: 5%;
+            margin-bottom: 5%;
         }
 
         .container {
@@ -85,22 +87,14 @@
             position: relative;
         }
 
-        .form-control input {
+        .form-control input, .form-control select {
             width: 100%;
             padding: 10px 5px;
             border: none;
             outline: none;
             background: transparent;
             font-size: 16px;
-        }
-
-        .form-control select {
-            width: 100%;
-            padding: 10px 5px;
-            border: none;
-            outline: none;
-            background: transparent;
-            font-size: 16px;
+            appearance: none;
         }
 
         .form-control label {
@@ -112,25 +106,40 @@
             transition: 0.3s ease;
         }
 
-        .form-control input:focus~label,
-        .form-control input:not(:placeholder-shown)~label {
+        .form-control input:focus ~ label,
+        .form-control select:focus ~ label {
             top: -8px;
             left: 5px;
             padding: 0 4px;
         }
 
-        .form-control input:focus~select,
-        .form-control input:not(:placeholder-shown)~select {
+        .form-control input:not(:placeholder-shown) ~ label {
             top: -8px;
             left: 5px;
             padding: 0 4px;
         }
+
+        .form-control select[value]:not([value=""]) ~ label {
+            top: -8px;
+            left: 5px;
+            padding: 0 4px;
+        }
+
+        .form-control input[type="datetime-local"]:valid ~ label {
+            top: -8px;
+            left: 5px;
+            padding: 0 4px;
+        }
+
+        .form-control
 
         .form-control:focus {
             border-color: #7ABFBF;
             box-shadow: none;
         }
 
+
+        /* Botão de Salvar */
         .btn {
             background-color: #7ABFBF;
             border: none;
@@ -147,6 +156,7 @@
             color: white;
         }
 
+        /* O link de Voltar */
         .back-link {
             text-align: center;
             margin-top: 15px;
@@ -177,17 +187,19 @@
 
         <!-- Formulario -->
         <div class="container-fluid">
-        <h1><i class="bi bi-calendar-heart-fill"></i>Cadastro de Consultas</h1>
+        <h1><i class="bi bi-calendar-heart-fill">Cadastro de Consultas</i></h1>
             <form th:action="@{/consultas/salvar}" method="POST" th:object="${consulta}">
 
                 <input type="hidden" name="idConsulta" th:field="*{idConsulta}" readonly />
 
+                <!-- Data e hora-->
                 <div class="form-control">
                     <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}"
                         placeholder=" " required />
                     <label for="dataehoraConsulta">Data e Hora</label>
                 </div>
 
+                <!-- Observação -->
                 <div class="form-control">
                     <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}"
                         placeholder=" " required />
@@ -195,6 +207,7 @@
                 </div>
                 <br>
 
+                <!-- Especialidade -->
                 <div class="form-control">
                     <select th:field="*{medico}" required>
                         <option value="">-- Selecione --</option>
@@ -205,6 +218,7 @@
                     <label>Especialidade</label>
                 </div>
 
+                <!-- Paciente -->
                 <div class="form-control">
                     <select th:field="*{cliente}" required>
                         <option value="">-- Selecione --</option>
@@ -214,6 +228,7 @@
                     <label>Paciente</label>
                 </div>
 
+                <!-- Médico -->
                 <div class="form-control">
                     <select th:field="*{medico}" required>
                         <option value="">-- Selecione --</option>
