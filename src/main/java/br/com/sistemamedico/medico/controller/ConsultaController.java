@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.sistemamedico.medico.dto.MedicoConsulta;
 import br.com.sistemamedico.medico.entity.Consulta;
 import br.com.sistemamedico.medico.service.ClienteService;
 import br.com.sistemamedico.medico.service.ConsultaService;
@@ -21,7 +22,7 @@ import br.com.sistemamedico.medico.service.MedicoService;
 public class ConsultaController {
     
     @Autowired
-    private ConsultaService service;
+    private ConsultaService consultaService;
 
     @Autowired
     private ClienteService clienteService;
@@ -31,7 +32,7 @@ public class ConsultaController {
 
     @GetMapping("/listar")
     public String Listar(Model model){
-        List<Consulta> consultas = service.findAll();
+        List<Consulta> consultas = consultaService.findAll();
         model.addAttribute("consultas", consultas);
         return "consulta/consultaListar";
     }
@@ -47,7 +48,7 @@ public class ConsultaController {
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Consulta consulta, Model model){
         try {
-            service.save(consulta);
+            consultaService.save(consulta);
             return "redirect:/consultas/listar";
     
         } catch (IllegalArgumentException e) {
@@ -65,7 +66,7 @@ public class ConsultaController {
 
     @GetMapping("/editar/{id}")
     public String editarForm(@PathVariable Integer id, Model model){
-        Consulta consulta = service.findById(id);
+        Consulta consulta = consultaService.findById(id);
         model.addAttribute("consulta", consulta);
         model.addAttribute("medicos", medicoService.findAll());
         model.addAttribute("clientes", clienteService.findAll());
@@ -74,7 +75,14 @@ public class ConsultaController {
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable Integer id){
-        service.deleteById(id);
+        consultaService.deleteById(id);
         return "redirect:/consultas/listar";
+    }
+
+    @GetMapping("/listar-nome-medico")
+    public String listarNomeMedico(Model model){
+        List<MedicoConsulta> consultas = consultaService.buscarNomeMedico();
+        model.addAttribute("consultas", consultas);
+        return "consulta/listaMedicoNome";
     }
 }

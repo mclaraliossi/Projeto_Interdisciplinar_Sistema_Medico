@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.sistemamedico.medico.dto.MedicoConsulta;
 import br.com.sistemamedico.medico.entity.Consulta;
 import br.com.sistemamedico.medico.repository.ConsultaRepository;
 
@@ -14,7 +15,7 @@ import br.com.sistemamedico.medico.repository.ConsultaRepository;
 public class ConsultaService {
     
     @Autowired
-    private ConsultaRepository repository;
+    private ConsultaRepository consultaRepository;
 
     public Consulta save(Consulta consulta){
 
@@ -23,7 +24,7 @@ public class ConsultaService {
         validarConflitoAgendaPaciente(consulta);
         validarIntervaloMinimo(consulta);
 
-        return repository.save(consulta);
+        return consultaRepository.save(consulta);
     }
 
     public void validarData(Consulta consulta) {
@@ -43,10 +44,10 @@ public class ConsultaService {
         Integer idMedico = consulta.getMedico().getIdMedico();
         LocalDateTime data = consulta.getDataehoraConsulta();
 
-        boolean existe = repository.existsByMedicoIdMedicoAndDataehoraConsulta(idMedico, data);
+        boolean existe = consultaRepository.existsByMedicoIdMedicoAndDataehoraConsulta(idMedico, data);
 
         if (consulta.getIdConsulta() != null) {
-            Consulta atual = repository.findById(consulta.getIdConsulta()).orElse(null);
+            Consulta atual = consultaRepository.findById(consulta.getIdConsulta()).orElse(null);
             if (atual != null &&
                 atual.getMedico().getIdMedico().equals(idMedico) &&
                 atual.getDataehoraConsulta().equals(data)) {
@@ -66,10 +67,10 @@ public class ConsultaService {
         Integer idCliente = consulta.getCliente().getIdCliente();
         LocalDateTime data = consulta.getDataehoraConsulta();
 
-        boolean existe = repository.existsByClienteIdClienteAndDataehoraConsulta(idCliente, data);
+        boolean existe = consultaRepository.existsByClienteIdClienteAndDataehoraConsulta(idCliente, data);
 
         if (consulta.getIdConsulta() != null) {
-            Consulta atual = repository.findById(consulta.getIdConsulta()).orElse(null);
+            Consulta atual = consultaRepository.findById(consulta.getIdConsulta()).orElse(null);
 
             if (atual != null &&
                 atual.getCliente().getIdCliente().equals(idCliente) &&
@@ -90,7 +91,7 @@ public class ConsultaService {
         Integer idMedico = consulta.getMedico().getIdMedico();
         LocalDateTime dataNova = consulta.getDataehoraConsulta();
 
-        List<Consulta> consultasMedico = repository.findByMedicoIdMedico(idMedico);
+        List<Consulta> consultasMedico = consultaRepository.findByMedicoIdMedico(idMedico);
 
         for (Consulta c : consultasMedico) {
 
@@ -110,14 +111,17 @@ public class ConsultaService {
     }
 
     public List<Consulta> findAll(){
-        return repository.findAll();
+        return consultaRepository.findAll();
     }
 
     public Consulta findById(Integer id){
-        return repository.findById(id).orElse(null);
+        return consultaRepository.findById(id).orElse(null);
     }
 
     public void deleteById(Integer id){
-        repository.deleteById(id);
+        consultaRepository.deleteById(id);
+    }
+    public List<MedicoConsulta> buscarNomeMedico(){
+        return consultaRepository.buscarNomeMedico();
     }
 }
