@@ -8,7 +8,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
+    <script th:inline="javascript">
+        const select = document.querySelector('.form-control select');
+
+        select.addEventListener('change', function () {
+            if (this.value !== "") {
+                this.classList.add('filled');
+            } else {
+                this.classList.remove('filled');
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let erro = /*[[${erro}]]*/ null;
+
+            if (erro !== null) {
+                let modal = new bootstrap.Modal(document.getElementById('erroModal'));
+                modal.show();
+            }
+        });
+    </script>
 
     <style>
         body {
@@ -88,7 +111,8 @@
             position: relative;
         }
 
-        .form-control input, .form-control select {
+        .form-control input,
+        .form-control select {
             width: 100%;
             padding: 10px 5px;
             border: none;
@@ -107,33 +131,31 @@
             transition: 0.3s ease;
         }
 
-        .form-control input:focus ~ label,
-        .form-control select:focus ~ label {
+        .form-control input:focus~label,
+        .form-control select:focus~label {
             top: -8px;
             left: 5px;
             padding: 0 4px;
         }
 
-        .form-control input:not(:placeholder-shown) ~ label {
+        .form-control input:not(:placeholder-shown)~label {
             top: -8px;
             left: 5px;
             padding: 0 4px;
         }
 
-        .form-control select.filled ~ label {
-            top: -8px;
-            left: 5px;
-            padding: 0 4px;
-        }
-        
-
-        .form-control input[type="datetime-local"]:valid ~ label {
+        .form-control select.filled~label {
             top: -8px;
             left: 5px;
             padding: 0 4px;
         }
 
-        .form-control
+
+        .form-control input[type="datetime-local"]:valid~label {
+            top: -8px;
+            left: 5px;
+            padding: 0 4px;
+        }
 
         .form-control:focus {
             border-color: #7ABFBF;
@@ -223,6 +245,7 @@
                 </div>
 
                 <!-- Paciente -->
+                <!--
                 <div class="form-control">
                     <select th:field="*{cliente}" required>
                         <option value="">-- Selecione --</option>
@@ -231,7 +254,18 @@
                     </select>
                     <label>Paciente</label>
                 </div>
-
+                -->
+                <div class="form-control">
+                <label for="fruta">Escolha uma fruta:</label>
+                <input list="frutas" id="fruta" name="fruta">
+                
+                    <datalist id="frutas">
+                        <option value="Maçã">
+                        <option value="Banana">
+                        <option value="Laranja">
+                        <option value="Manga">
+                    </datalist>
+                </div>
                 <!-- Médico -->
                 <div class="form-control">
                     <select th:field="*{medico}" required>
@@ -273,30 +307,6 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-        <script th:inline="javascript">
-            const select = document.querySelector('.form-control select');
-
-            select.addEventListener('change', function() {
-                if (this.value !== "") {
-                    this.classList.add('filled');
-                } else {
-                    this.classList.remove('filled');
-                }
-            });
-
-            document.addEventListener("DOMContentLoaded", function () {
-                let erro = /*[[${erro}]]*/ null;
-    
-                if (erro !== null) {
-                    let modal = new bootstrap.Modal(document.getElementById('erroModal'));
-                    modal.show();
-                }
-            });
-        </script>
 </body>
 
 </html>

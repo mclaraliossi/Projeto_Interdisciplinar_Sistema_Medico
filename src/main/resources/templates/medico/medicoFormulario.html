@@ -7,6 +7,58 @@
     <title>Cadastro de Médico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">  </script>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const profilePic = document.getElementById('profile-pic');
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+
+        if (toastTrigger) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+        })
+        }
+        
+        fileInput.addEventListener('change', function(event) {z
+            const file = event.target.files[0]; // Pega o primeiro arquivo selecionado
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader(); // Cria um leitor de arquivos
+
+                reader.onload = function(e) {
+                    // Quando o arquivo for lido, define o src da imagem como o resultado (URL dos dados)
+                    profilePic.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados (Data URL)
+            }
+        });
+
+
+        
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+        const appendAlert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)
+        }
+
+        const alertTrigger = document.getElementById('liveAlertBtn')
+        if (alertTrigger) {
+        alertTrigger.addEventListener('click', () => {
+            appendAlert('Médico cadastrado com sucesso!', 'success')
+        })
+        }
+    </script>
 
     <style>
         body {
@@ -229,32 +281,25 @@
                     <label for="crmMedico">CRM</label>
                 </div>
 
-                <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+                <!-- Botão salvar e a mensagem -->
+                <button type="submit" value="salvar" class="btn" id="liveToastBtn">Salvar</button>
 
                 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
-                    <img src="..." class="rounded me-2" alt="...">
-                    <strong class="me-auto">Bootstrap</strong>
-                    <small>11 mins ago</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                    Hello, world! This is a toast message.
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Botão salvar e a mensagem -->
-                <button type="submit" value="salvar" class="btn" id="liveToastBtn" >Salvar</button>
-                <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                      <div class="toast-body">
-                        Médico cadastrado com sucesso!
-                      </div>
+                      <img src="..." class="rounded me-2" alt="...">
+                      <strong class="me-auto">Bootstrap</strong>
                       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
+                    <div class="toast-body">
+                        Médico cadastrado com sucesso!
+                    </div>
+                  </div>
                 </div>
+                
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit"  value="salvar" class="btn" id="liveAlertBtn">Salvar</button>
 
                 <div class="back-link">
                     <a href="/medico">Voltar</a>
@@ -265,40 +310,6 @@
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous">
-    
-    const fileInput = document.getElementById('file-input');
-    const profilePic = document.getElementById('profile-pic');
-    const toastTrigger = document.getElementById('liveToastBtn')
-    const toastLiveExample = document.getElementById('liveToast')
-
-    if (toastTrigger) {
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-    toastTrigger.addEventListener('click', () => {
-        toastBootstrap.show()
-    })
-    }
-    
-    fileInput.addEventListener('change', function(event) {z
-        const file = event.target.files[0]; // Pega o primeiro arquivo selecionado
-
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader(); // Cria um leitor de arquivos
-
-            reader.onload = function(e) {
-                // Quando o arquivo for lido, define o src da imagem como o resultado (URL dos dados)
-                profilePic.src = e.target.result;
-            };
-
-            reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados (Data URL)
-        }
-    });
-
-
-
-    </script>
 </body>
 
 </html>

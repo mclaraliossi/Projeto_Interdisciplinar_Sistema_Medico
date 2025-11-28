@@ -7,6 +7,97 @@
     <title>Cadastro de Pacientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const profilePic = document.getElementById('profile-pic');
+
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files[0]; // Pega o primeiro arquivo selecionado
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader(); // Cria um leitor de arquivos
+
+                reader.onload = function (e) {
+                    // Quando o arquivo for lido, define o src da imagem como o resultado (URL dos dados)
+                    profilePic.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados (Data URL)
+            }
+        });
+    </script>
+    <script>
+
+        $(document).ready(function () {
+
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+            }
+
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function () {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if (validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#rua").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+
+
+    </script>
 
     <style>
         body {
@@ -203,7 +294,8 @@
             <p>
                 Preencha as informações ao lado para registrar um novo paciente no sistema.
             </p>
-            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
+            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png"
+                alt="">
         </div>
 
         <!-- Formulario -->
@@ -215,49 +307,49 @@
 
                 <!-- Nome do Cliente -->
                 <div class="form-control">
-                    <input type="text" name="nomeCliente" th:field="*{nomeCliente}" placeholder=" " required />
+                    <input type="text" name="nomeCliente" th:field="*{nomeCliente}" required />
                     <label for="nomeCliente">Nome do Cliente</label>
                 </div>
 
                 <!-- Cep -->
-                <div class="form-control">
-                    <input type="number" name="cepCliente" th:field="*{cepCliente}" placeholder=" " required />
-                    <label for="cepCliente">Cep<input name="cep" type="text" id="cep" value="" size="10" maxlength="9" /></label>
+                <div class="form-control" size="10" maxlength="9">
+                    <input type="text" name="cepCliente" id="cep" th:field="*{cepCliente}" required />
+                    <label for="cepCliente">Cep</label>
                 </div>
 
                 <!-- Estado -->
-                <div class="form-control">
-                    <input type="text" name="estadoCliente" th:field="*{estadoCliente}" placeholder=" " required />
-                    <label for="estadoCliente">Estado<input name="uf" type="text" id="uf" size="2" /></label>
+                <div class="form-control"  size="2">
+                    <input type="text" id="uf" name="estadoCliente" th:field="*{estadoCliente}" required />
+                    <label for="estadoCliente">Estado</label>
                 </div>
 
                 <!-- Cidade -->
-                <div class="form-control">
-                    <input type="text" name="cidadeCliente" th:field="*{cidadeCliente}" placeholder=" " required />
-                    <label for="cidadeCliente">Cidade<input name="cidade" type="text" id="cidade" size="40" /></label>
+                <div class="form-control"  size="40">
+                    <input type="text" id="cidade" name="cidadeCliente" th:field="*{cidadeCliente}" required />
+                    <label for="cidadeCliente">Cidade</label>
                 </div>
 
                 <!-- Rua -->
-                <div class="form-control">
-                    <input type="text" name="ruaCliente" th:field="*{ruaCliente}" placeholder=" " required />
-                    <label for="ruaCliente">Rua<input name="rua" type="text" id="rua" size="60" /></label>
+                <div class="form-control" size="60">
+                    <input type="text" id="rua"  name="ruaCliente" th:field="*{ruaCliente}" required />
+                    <label for="ruaCliente">Rua</label>
                 </div>
 
                 <!-- Bairro -->
-                <div class="form-control">
-                    <input type="text" name="bairroCliente" th:field="*{bairroCliente}" placeholder=" " required />
-                    <label for="bairroCliente">Bairro<input name="bairro" type="text" id="bairro" size="40" /></label>
+                <div class="form-control"  size="40">
+                    <input type="text" id="bairro" name="bairroCliente" th:field="*{bairroCliente}" required />
+                    <label for="bairroCliente">Bairro<input /></label>
                 </div>
 
                 <!-- Numero -->
                 <div class="form-control">
-                    <input type="text" name="numeroCliente" th:field="*{numeroCliente}" placeholder=" " required />
+                    <input type="text" name="numeroCliente" th:field="*{numeroCliente}" required />
                     <label for="numeroCliente">Número</label>
                 </div>
 
                 <!-- Telefone -->
                 <div class="form-control">
-                    <input type="tel" name="telefoneCliente" th:field="*{telefoneCliente}" placeholder=" " required />
+                    <input type="tel" name="telefoneCliente" th:field="*{telefoneCliente}" required />
                     <label for="telefoneCliente">Telefone</label>
                 </div>
 
@@ -270,90 +362,6 @@
             </form>
         </div>
     </div>
-
-    <!-- Adicionando JQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
-
-    <script>
-        $(document).ready(function() {
-
-        function limpa_formulário_cep() {
-            // Limpa valores do formulário de cep.
-            $("#rua").val("");
-            $("#bairro").val("");
-            $("#cidade").val("");
-            $("#uf").val("");
-        }
-
-        //Quando o campo cep perde o foco.
-        $("#cep").blur(function() {
-
-            //Nova variável "cep" somente com dígitos.
-            var cep = $(this).val().replace(/\D/g, '');
-
-            //Verifica se campo cep possui valor informado.
-            if (cep != "") {
-
-                //Expressão regular para validar o CEP.
-                var validacep = /^[0-9]{8}$/;
-
-                //Valida o formato do CEP.
-                if(validacep.test(cep)) {
-
-                    //Preenche os campos com "..." enquanto consulta webservice.
-                    $("#rua").val("...");
-                    $("#bairro").val("...");
-                    $("#cidade").val("...");
-
-                    //Consulta o webservice viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-
-                        if (!("erro" in dados)) {
-                            //Atualiza os campos com os valores da consulta.
-                            $("#rua").val(dados.logradouro);
-                            $("#bairro").val(dados.bairro);
-                            $("#cidade").val(dados.localidade);
-                            $("#uf").val(dados.uf);
-                        } //end if.
-                        else {
-                            //CEP pesquisado não foi encontrado.
-                            limpa_formulário_cep();
-                            alert("CEP não encontrado.");
-                        }
-                    });
-                } //end if.
-                else {
-                    //cep é inválido.
-                    limpa_formulário_cep();
-                    alert("Formato de CEP inválido.");
-                }
-            } //end if.
-            else {
-                //cep sem valor, limpa formulário.
-                limpa_formulário_cep();
-            }
-        });
-        });
-                
-        const fileInput = document.getElementById('file-input');
-        const profilePic = document.getElementById('profile-pic');
-
-        fileInput.addEventListener('change', function (event) {
-            const file = event.target.files[0]; // Pega o primeiro arquivo selecionado
-
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader(); // Cria um leitor de arquivos
-
-                reader.onload = function (e) {
-                    // Quando o arquivo for lido, define o src da imagem como o resultado (URL dos dados)
-                    profilePic.src = e.target.result;
-                };
-
-                reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados (Data URL)
-            }
-        });
-
-    </script>
 </body>
+
+</html>

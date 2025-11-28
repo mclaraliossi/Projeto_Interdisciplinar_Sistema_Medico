@@ -111,164 +111,8 @@
 <body>
   <div class="container">
     <div class="left-side">
-      <h1><i class="bi bi-clipboard2-pulse-fill">Lista de Médicos</i></h1>
-      <a href="/medicos/criar" class="btn-custom">Cadastrar Médico</a>
-      <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
-    </div>
-
-     <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Especialidade</th>
-                    <th>CRM</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr th:each="medico : ${medicos}">
-                    <td th:text="${medico.nomeMedico}"></td>
-                    <td th:text="${medico.especialidadeMedico}"></td>
-                    <td th:text="${medico.crmMedico}"></td>
-                    <td class="actions">
-                        <a th:href="@{/medicos/editar/{id}(id=${medico.idMedico})}">Editar</a>
-                        <a th:href="@{/medicos/excluir/{id}(id=${medico.idMedico})}">Excluir</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-  </div>
-    
-
-
-   
-
-    <div class="back-link">
-        <a href="/medico">Voltar</a>
-    </div>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Médicos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <style>
-        body {
-            background-color: #A3D9D3;
-            font-family: "Poppins", sans-serif;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .container {
-            display: flex;
-            background-color: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .left-side {
-            background-color: #fff;
-            width: 40%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .left-side h1 {
-            color: #7ABFBF;
-            font-weight: 600;
-            margin-bottom: 25px;
-        }
-
-        .table-container {
-            margin: 2%;
-            background: #fff;
-            width: 60%;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        thead tr {
-            border-radius: 15px;
-            background-color: #7ABFBF;
-            color: white;
-            font-weight: bold;
-        }
-
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        a.btn-custom {
-            padding: 6px 14px;
-            background: #7ABFBF;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        a.btn-custom:hover {
-            background-color: #569f9f;
-        }
-
-        .actions a {
-            margin: 0 5px;
-            font-weight: 500;
-            text-decoration: none;
-            color: #7ABFBF;
-        }
-
-        .actions a:hover {
-            text-decoration: underline;
-        }
-
-        .back-link {
-            margin-top: 20px;
-        }
-
-        .back-link a {
-            color: #7ABFBF;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-
-<body>
-  <div class="container">
-    <div class="left-side">
       <h1><i class="bi bi-clipboard2-pulse-fill">Lista de Consulta</i></h1>
-      <h2><a href="/consultas/criar">Cadastrar Consulta</a></h2>
+      <a href="/consultas/criar" class="btn-custom">Cadastrar Consulta</a>
       <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
     </div>
 
@@ -276,74 +120,39 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Observação</th>
                     <th>Especialidade</th>
-                    <th>CRM</th>
+                    <th>Médico</th>
+                    <th>Paciente</th>
                     <th>Ações</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr th:each="medico : ${medicos}">
-                    <td th:text="${medico.nomeMedico}"></td>
-                    <td th:text="${medico.especialidadeMedico}"></td>
-                    <td th:text="${medico.crmMedico}"></td>
+                <tr th:each="consulta: ${consultas}">
+                    <td th:text="${consulta.dataehoraConsulta}"></td>
+                    <td th:text="${consulta.observacoesConsulta}"></td>
+                    <td th:text="${consulta.medico != null ? consulta.medico.especialidadeMedico : 'Sem Especialidade'}"></td>
+                    <td th:text="${consulta.medico != null ? consulta.medico.nomeMedico : 'Sem nome do Médico'}"></td>
+                    <td th:text="${consulta.cliente != null ? consulta.cliente.nomeCliente : 'Sem Paciente'}"></td>
                     <td class="actions">
-                        <a th:href="@{/medicos/editar/{id}(id=${medico.idMedico})}">Editar</a>
-                        <a th:href="@{/medicos/excluir/{id}(id=${medico.idMedico})}">Excluir</a>
+                      <a th:href="@{/consultas/editar/{id}(id=${consulta.idConsulta})}">Editar</a>
+                      <a th:href="@{/consultas/excluir/{id}(id=${consulta.idConsulta})}">Excluir</a>
                     </td>
-                </tr>
+                  </tr>
             </tbody>
         </table>
     </div>
 
-  </div>
-    
-
-
+</div>
    
-
     <div class="back-link">
         <a href="/medico">Voltar</a>
     </div>
 
 </body>
 </html>
-
-  
-    <br>
-    <table border="1" align="center" id="custumer">
-      <thead id="tabelahead">
-        <tr>
-          <td colspan="6" align="center">Lista de Consultas</td>
-        </tr>
-        <tr>
-          <th>Data</th>
-          <th>Observação</th>
-          <th>Especialidade</th>
-          <th>Médico</th>
-          <th>Paciente</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="tabelabody">
-        <tr th:each="consulta: ${consultas}">
-          <td th:text="${consulta.dataehoraConsulta}"></td>
-          <td th:text="${consulta.observacoesConsulta}"></td>
-          <td th:text="${consulta.medico != null ? consulta.medico.especialidadeMedico : 'Sem Especialidade'}"></td>
-          <td th:text="${consulta.medico != null ? consulta.medico.nomeMedico : 'Sem nome do Médico'}"></td>
-          <td th:text="${consulta.cliente != null ? consulta.cliente.nomeCliente : 'Sem Paciente'}"></td>
-
-          <td>
-            <a th:href="@{/consultas/editar/{id}(id=${consulta.idConsulta})}">Editar</a>
-            <a th:href="@{/consultas/excluir/{id}(id=${consulta.idConsulta})}">Excluir</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3><a href="/medico">Voltar</a></h3>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
@@ -355,5 +164,3 @@
 
     @Column(nullable = false, length = 50)
     private String observacoesConsulta;-->
-</body>
-</html>
