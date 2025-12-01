@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.sistemamedico.medico.dto.MedicoConsulta;
+//import br.com.sistemamedico.medico.dto.MedicoConsulta;
 import br.com.sistemamedico.medico.entity.Consulta;
 import br.com.sistemamedico.medico.repository.ConsultaRepository;
 
@@ -121,7 +121,7 @@ public class ConsultaService {
     public void deleteById(Integer id){
         consultaRepository.deleteById(id);
     }
-    public List<MedicoConsulta> buscarNomeMedico(){
-        return consultaRepository.buscarNomeMedico();
-    }
+    // public List<MedicoConsulta> buscarNomeMedico(){
+    //     return consultaRepository.buscarNomeMedico();
+    // }
 }

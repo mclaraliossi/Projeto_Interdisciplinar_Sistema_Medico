@@ -220,59 +220,52 @@
 
                 <!-- Data e hora-->
                 <div class="form-control">
-                    <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}"
-                        placeholder=" " required />
+                    <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}" required />
                     <label for="dataehoraConsulta">Data e Hora</label>
                 </div>
 
                 <!-- Observação -->
                 <div class="form-control">
-                    <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder=" "
-                        required />
+                    <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder=" " />
                     <label for="observacoesConsulta">Observação</label>
                 </div>
                 <br>
 
                 <!-- Especialidade -->
                 <div class="form-control">
-                    <select th:field="*{medico}" required>
+                    <input list="listarMedico" th:field="*{medico}" placeholder=" " required />
+                
+                    <datalist id="listarMedico">
                         <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${medicos}" th:value="${cat.idMedico}"
-                            th:text="${cat.especialidadeMedico}">
+                        <option th:each="cat : ${medicos}" th:value="${cat.especialidadeMedico}" data-id="${cat.idMedico}">
                         </option>
-                    </select>
+                    </datalist>
+                
                     <label>Especialidade</label>
                 </div>
 
                 <!-- Paciente -->
-                <!--
                 <div class="form-control">
-                    <select th:field="*{cliente}" required>
+                    <input list="listarCliente" th:field="*{cliente}" placeholder=" " required />
+                
+                    <datalist id="listarCliente">
                         <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${clientes}" th:value="${cat.idCliente}" th:text="${cat.nomeCliente}">
-                        </option>
-                    </select>
+                        <option th:each="cat : ${clientes}" th:value="${cat.noemCliente}" th:text="${cat.idCliente}"></option>
+
+                    </datalist>
+                
                     <label>Paciente</label>
                 </div>
-                -->
-                <div class="form-control">
-                <label for="fruta">Escolha uma fruta:</label>
-                <input list="frutas" id="fruta" name="fruta">
-                
-                    <datalist id="frutas">
-                        <option value="Maçã">
-                        <option value="Banana">
-                        <option value="Laranja">
-                        <option value="Manga">
-                    </datalist>
-                </div>
+
                 <!-- Médico -->
                 <div class="form-control">
-                    <select th:field="*{medico}" required>
+                    <input list="listaMedico" th:field="*{medico}" placeholder=" " required />
+                
+                    <datalist id="listaMedico">
                         <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${medicos}" th:value="${cat.idMedico}" th:text="${cat.nomeMedico}">
-                        </option>
-                    </select>
+                        <option th:each="cat : ${medicos}" th:value="${cat.nomeMedico}" th:text="${cat.idMedico}"></option>
+                    </datalist>
+                
                     <label>Médico</label>
                 </div>
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.sistemamedico.medico.dto.MedicoConsulta;
+//import br.com.sistemamedico.medico.dto.MedicoConsulta;
 import br.com.sistemamedico.medico.entity.Consulta;
 import br.com.sistemamedico.medico.service.ClienteService;
 import br.com.sistemamedico.medico.service.ConsultaService;
@@ -79,10 +79,10 @@ public class ConsultaController {
         return "redirect:/consultas/listar";
     }
 
-    @GetMapping("/listar-nome-medico")
-    public String listarNomeMedico(Model model){
-        List<MedicoConsulta> consultas = consultaService.buscarNomeMedico();
-        model.addAttribute("consultas", consultas);
-        return "consulta/listaMedicoNome";
-    }
+    // @GetMapping("/listar-nome-medico")
+    // public String listarNomeMedico(Model model){
+    //     List<MedicoConsulta> consultas = consultaService.buscarNomeMedico();
+    //     model.addAttribute("consultas", consultas);
+    //     return "consulta/listaMedicoNome";
+    // }
 }
