@@ -3,64 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Pacientes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body>
-    <h2><a href="/clientes/criar">Cadastrar Pacientes</a></h2>
-  
-    <br>
-    <table border="1" align="center" id="custumer">
-      <thead id="tabelahead">
-        <tr>
-          <td colspan="10" align="center">Lista de Pacientes</td>
-        </tr>
-        <tr>
-          <th>Nome </th>
-          <th>Estado</th>
-          <th>Cidade</th>
-          <th>Cep</th>
-          <th>Rua</th>
-          <th>Numero</th>
-          <th>Bairro</th>
-          <th>Telefone</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="tabelabody">
-        <tr th:each="cliente: ${clientes}">
-          <td th:text="${cliente.nomeCliente}"></td>
-          <td th:text="${cliente.estadoCliente}"></td>
-          <td th:text="${cliente.cidadeCliente}"></td>
-          <td th:text="${cliente.cepCliente}"></td>
-          <td th:text="${cliente.ruaCliente}"></td>
-          <td th:text="${cliente.numeroCliente}"></td>
-          <td th:text="${cliente.bairroCliente}"></td>
-          <td th:text="${cliente.telefoneCliente}"></td>
-          <td>
-            <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}">Editar</a>
-            <a th:href="@{/clientes/excluir/{id}(id=${cliente.idCliente})}">Excluir</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <title>Lista de Médicos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <h3><a href="/medico">Voltar</a></h3>
+    <style>
+        body {
+            background-color: #A3D9D3;
+            font-family: "Poppins", sans-serif;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .left-side {
+            background-color: #fff;
+            width: 30%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .left-side h1 {
+            color: #7ABFBF;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .table-container {
+            margin: 2%;
+            background: #fff;
+            width: 60%;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            border-radius: 15px;
+            background-color: #7ABFBF;
+            color: white;
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        a.btn-custom {
+            padding: 6px 14px;
+            background: #7ABFBF;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        a.btn-custom:hover {
+            background-color: #569f9f;
+        }
+
+        .actions a {
+            margin: 0 5px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #7ABFBF;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #7ABFBF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-side">
+      <h1><i class="bi bi-clipboard2-pulse-fill">Lista de Paciente</i></h1>
+      <a href="/consultas/criar" class="btn-custom">Cadastrar Paciente</a>
+      <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
+    </div>
+
+     <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                  <th>Nome </th>
+                  <th>Estado</th>
+                  <th>Cidade</th>
+                  <th>Cep</th>
+                  <th>Rua</th>
+                  <th>Numero</th>
+                  <th>Bairro</th>
+                  <th>Telefone</th>
+                  <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+              <tr th:each="cliente: ${clientes}">
+                <td th:text="${cliente.nomeCliente}"></td>
+                <td th:text="${cliente.estadoCliente}"></td>
+                <td th:text="${cliente.cidadeCliente}"></td>
+                <td th:text="${cliente.cepCliente}"></td>
+                <td th:text="${cliente.ruaCliente}"></td>
+                <td th:text="${cliente.numeroCliente}"></td>
+                <td th:text="${cliente.bairroCliente}"></td>
+                <td th:text="${cliente.telefoneCliente}"></td>
+                <td>
+                  <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}">Editar</a>
+                  <a th:href="@{/clientes/excluir/{id}(id=${cliente.idCliente})}">Excluir</a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+   
+    <div class="back-link">
+        <a href="/medico">Voltar</a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
-    
-<!-- private Integer idCliente;
-
-    @Column(nullable = false, length = 30)
-    private String nomeCliente;
-
-    @Column(nullable = false, length = 30)
-    private String enderecoCliente;
-
-    @Column(nullable = false, length = 11)
-    private String telefoneCliente;-->
 </body>
+
 </html>
+
+    

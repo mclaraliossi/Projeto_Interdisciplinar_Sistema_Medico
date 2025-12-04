@@ -231,11 +231,11 @@
 
                 <!-- Especialidade -->
                 <div class="form-control">
-                    <input list="listarMedico" id="campo" th:field="*{medico}" placeholder=" " required />
+                    <input list="listarMedico" name="medico" id="campo" th:field="*{medico}" placeholder=" " required />
                 
                     <datalist id="listarMedico">
                         <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${medicos}" th:value="${cat.especialidadeMedico}" data-id="${cat.idMedico}">
+                        <option th:each="cat : ${medicos}" th:text="${cat.especialidadeMedico}" th:value="${cat.idMedico}">
                         </option>
                     </datalist>
                 
@@ -244,11 +244,11 @@
 
                 <!-- Paciente -->
                 <div class="form-control">
-                    <input list="listarCliente" id="campoPaciente" th:field="*{cliente}" placeholder=" " required />
+                    <input list="listarCliente" name="cliente" id="campoPaciente" th:field="*{cliente}" placeholder=" " required />
                 
                     <datalist id="listarCliente">
                         <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${clientes}" th:value="${cat.nomeCliente}" th:text="${cat.idCliente}"></option>
+                        <option th:each="cat : ${clientes}" th:text="${cat.nomeCliente}" th:value="${cat.idCliente}"></option>
 
                     </datalist>
                 
@@ -257,11 +257,11 @@
 
                 <!-- Médico -->
                 <div class="form-control">
-                    <input list="listaMedico" id="campoMedico" th:field="*{medico}" placeholder=" " required />
+                    <input list="listaMedico" name="medico" id="campoMedico" th:field="*{medico}" placeholder=" " required />
                 
                     <datalist id="listaMedico">
                         <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${medicos}" th:value="${cat.nomeMedico}" th:text="${cat.idMedico}"></option>
+                        <option th:each="cat : ${medicos}" th:text="${cat.nomeMedico}" th:value="${cat.idMedico}"></option>
                     </datalist>
                 
                     <label>Médico</label>
