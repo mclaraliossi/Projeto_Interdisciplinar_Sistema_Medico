@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consultas por Médico</title>
+</head>
+<body>
+    <h2>Consultas por Médico</h2>
+
+    <form th:action="@{/consultas/listar-nome-medico}" method="get">
+        <label for="idMedico">Filtrar por Médico:</label>
+        <select name="idMedico" id="idMedico">
+            <option th:value="">-- Todos os Médicos --</option>
+            <option th:each="m : ${medicos}"
+                    th:value="${m.idMedico}"
+                    th:text="${m.nomeMedico}"
+                    th:selected="${idMedicoSelecionado == m.idMedico}">
+            </option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <hr>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Especialidade</th>
+                <th>Data e Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${consultas}">
+                <td th:text="${c.nomeCliente}"></td>
+                <td th:text="${c.nomeMedico}"></td>
+                <td th:text="${c.especialidadeMedico}"></td>
+                <td th:text="${#temporals.format(c.dataehoraConsulta, 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(consultas)}">
+                <td colspan="4" style="text-align:center;">Nenhuma consulta encontrada</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
