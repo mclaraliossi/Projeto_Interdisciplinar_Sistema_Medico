@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.sistemamedico.medico.dto.MedicoConsulta;
 import br.com.sistemamedico.medico.entity.Consulta;
@@ -80,7 +81,7 @@ public class ConsultaController {
     }
 
     @GetMapping("/listar-nome-medico")
-    public String listarNomeMedico(@ModelAttribute("idMedico") Integer idMedico, Model model) {
+    public String listarNomeMedico(@RequestParam(name = "idMedico", required = false) Integer idMedico, Model model) {
     
         List<MedicoConsulta> consultas;
     
@@ -96,6 +97,6 @@ public class ConsultaController {
         model.addAttribute("medicos", medicoService.findAll());
         model.addAttribute("idMedicoSelecionado", idMedico);
     
-        return "consulta/listarMedicoNome";
+        return "dto/listarMedicoNome";
     }
 }
