@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Consultas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-
 
     <style>
         body {
@@ -33,7 +30,6 @@
             max-width: 95%;
         }
 
-        /* Informaçãoes */
         .left-side {
             background-color: #ffffff;
             width: 40%;
@@ -45,29 +41,7 @@
             text-align: center;
         }
 
-        .profile-pic-container label {
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .profile-pic-container:hover .upload-btn {
-            opacity: 1;
-        }
-
-
-        .left-side h4 {
-            color: #7ABFBF;
-            margin-bottom: 15px;
-        }
-
-        .left-side p {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* Formulario */
         .container-fluid {
-            display: column;
             width: 60%;
             padding: 50px;
         }
@@ -89,15 +63,13 @@
             position: relative;
         }
 
-        .form-control input,
-        .form-control select {
+        .form-control input {
             width: 100%;
             padding: 10px 5px;
             border: none;
             outline: none;
             background: transparent;
             font-size: 16px;
-            appearance: none;
         }
 
         .form-control label {
@@ -109,59 +81,13 @@
             transition: 0.3s ease;
         }
 
-        .form-control label [type="datetime-local"] {
-            position: absolute;
-            left: 10px;
-            top: 12px;
-            font-size: 16px;
-            pointer-events: none;
-            transition: 0.3s ease;
-        }
-
         .form-control input:focus~label,
-        .form-control select:focus~label {
-            top: -8px;
-            left: 5px;
-            padding: 0 4px;
-        }
-
         .form-control input:not(:placeholder-shown)~label {
             top: -8px;
             left: 5px;
             padding: 0 4px;
         }
 
-        .form-control select.filled~label {
-            top: -8px;
-            left: 5px;
-            padding: 0 4px;
-        }
-
-        input[type="datetime-local"]:focus ~ label,
-        input[type="datetime-local"]:valid ~ label {
-            top: -8px;
-            left: 5px;
-            padding: 0 4px;
-        }
-
-        .form-control:focus {
-            border-color: #7ABFBF;
-            box-shadow: none;
-        }
-
-        input[type="datetime-local"]:not(:focus):invalid::-webkit-datetime-edit {
-            color: transparent;
-        }
-
-        /* Mostra quando o usuário clicar */
-        input[type="datetime-local"]:focus::-webkit-datetime-edit {
-            color: inherit;
-        }
-        input[type="datetime-local"]:not(:focus):invalid::-webkit-datetime-edit {
-            color: transparent;
-        }
-
-        /* Botão de Salvar */
         .btn {
             background-color: #7ABFBF;
             border: none;
@@ -169,7 +95,6 @@
             padding: 10px 20px;
             width: 100%;
             font-weight: 600;
-            transition: 0.3s;
             color: white;
         }
 
@@ -177,147 +102,106 @@
             background-color: #D9D9D9;
             color: white;
         }
-
-        /* O link de Voltar */
-        .back-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .back-link a {
-            color: #7ABFBF;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 
 </head>
 
 <body>
+
     <div class="container">
-        <!-- Informações do lado -->
+
         <div class="left-side">
-            <p>
-                Preencha as informações ao lado para registrar uma nova consulta no sistema.
-            </p>
-            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png"
-                alt="">
+            <p>Preencha as informações ao lado para registrar uma nova consulta no sistema.</p>
+            <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
         </div>
 
-        <!-- Formulario -->
         <div class="container-fluid">
-            <h1><i class="bi bi-calendar-heart-fill"></i>Cadastro de Consultas</h1>
+
+            <h1><i class="bi bi-calendar-heart-fill"></i> Cadastro de Consultas</h1>
 
             <form th:action="@{/consultas/salvar}" method="POST" th:object="${consulta}">
 
-                <input type="hidden" name="idConsulta" th:field="*{idConsulta}" readonly />
+                <input type="hidden" th:field="*{idConsulta}" />
 
-                <!-- Data e hora-->
+                <!-- Data e hora -->
                 <div class="form-control">
-                    <input type="datetime-local" name="dataehoraConsulta" th:field="*{dataehoraConsulta}" required />
-                    <label for="dataehoraConsulta">Data e Hora</label>
+                    <input type="datetime-local" th:field="*{dataehoraConsulta}" required>
+                    <label>Data e Hora</label>
                 </div>
 
                 <!-- Observação -->
                 <div class="form-control">
-                    <input type="text" name="observacoesConsulta" th:field="*{observacoesConsulta}" placeholder=" " />
-                    <label for="observacoesConsulta">Observação</label>
-                </div>
-                <br>
-
-                <!-- Especialidade -->
-                <div class="form-control">
-                    <input list="listarMedico" name="medico" id="campo" th:field="*{medico}" placeholder=" " required />
-                
-                    <datalist id="listarMedico">
-                        <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${medicos}" th:text="${cat.especialidadeMedico}" th:value="${cat.idMedico}">
-                        </option>
-                    </datalist>
-                
-                    <label>Especialidade</label>
+                    <input type="text" th:field="*{observacoesConsulta}" placeholder=" ">
+                    <label>Observação</label>
                 </div>
 
                 <!-- Paciente -->
                 <div class="form-control">
-                    <input list="listarCliente" name="cliente" id="campoPaciente" th:field="*{cliente}" placeholder=" " required />
-                
-                    <datalist id="listarCliente">
-                        <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${clientes}" th:text="${cat.nomeCliente}" th:value="${cat.idCliente}"></option>
+                    <input list="listaClientes" id="campoPacienteNome" placeholder=" " required />
+                    <input type="hidden" id="campoPacienteId" name="cliente" th:field="*{cliente}" />
 
+                    <datalist id="listaClientes">
+                        <option th:each="c : ${clientes}" 
+                                th:value="${c.nomeCliente}" 
+                                th:data-id="${c.idCliente}">
+                        </option>
                     </datalist>
-                
                     <label>Paciente</label>
                 </div>
 
                 <!-- Médico -->
                 <div class="form-control">
-                    <input list="listaMedico" name="medico" id="campoMedico" th:field="*{medico}" placeholder=" " required />
-                
-                    <datalist id="listaMedico">
-                        <option value="">-- Selecione --</option>
-                        <option th:each="cat : ${medicos}" th:text="${cat.nomeMedico}" th:value="${cat.idMedico}"></option>
+                    <input list="listaMedicos" id="campoMedicoNome" placeholder=" " required />
+                    <input type="hidden" id="campoMedicoId" name="medico" th:field="*{medico}" />
+
+                    <datalist id="listaMedicos">
+                        <option th:each="m : ${medicos}" 
+                                th:value="${m.nomeMedico}" 
+                                th:data-id="${m.idMedico}">
+                        </option>
                     </datalist>
-                
                     <label>Médico</label>
                 </div>
 
-                <button type="submit" value="salvar" class="btn">Salvar</button>
+                <!-- Especialidade -->
+                <div class="form-control">
+                    <input list="listaMedicos" id="campoEspecialidadeMedicoNome" placeholder=" " required />
+                    <input type="hidden" id="campoEspecialidadeMedicoId" name="medico" th:field="*{medico}" />
 
-                <div class="back-link">
-                    <a href="/medico">Voltar</a>
+                    <datalist id="listaEspecialidade">
+                        <option th:each="m : ${medicos}" 
+                                th:value="${m.especialidadeMedico}" 
+                                th:data-id="${m.idMedico}">
+                        </option>
+                    </datalist>
+                    <label>Especialidade</label>
                 </div>
 
             </form>
-            
+
         </div>
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    
-    <script th:inline="javascript">
-        const select = document.querySelector('.form-control select');
-
-        select.addEventListener('change', function () {
-            if (this.value !== "") {
-                this.classList.add('filled');
-            } else {
-                this.classList.remove('filled');
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            let erro = /*[[${erro}]]*/ null;
-
-            if (erro !== null) {
-                let modal = new bootstrap.Modal(document.getElementById('erroModal'));
-                modal.show();
-            }
-        });
-    </script>
-
+    <!-- SCRIPT PARA ASSOCIAR NOME → ID -->
     <script>
-        const campo = document.getElementById("campo");
-        const campoPaciente = document.getElementById("campoPaciente");
-        const campoMedico = document.getElementById("campoMedico");
-        
-        campo.addEventListener("keydown", function(e) {
-        e.preventDefault();
-        });
+        function conectarDatalist(inputNomeId, inputIdId, datalistId) {
+            const campoNome = document.getElementById(inputNomeId);
+            const campoId = document.getElementById(inputIdId);
+            const lista = document.getElementById(datalistId);
 
-        campoPaciente.addEventListener("keydown", function(e) {
-        e.preventDefault();
-        });
-        campoMedico.addEventListener("keydown", function(e) {
-        e.preventDefault();
-        });
+            campoNome.addEventListener("input", function () {
+                const nome = this.value;
+
+                const opt = Array.from(lista.options).find(o => o.value === nome);
+
+                campoId.value = opt ? opt.dataset.id : "";
+            });
+        }
+
+        conectarDatalist("campoPacienteNome", "campoPacienteId", "listaClientes");
+        conectarDatalist("campoMedicoNome", "campoMedicoId", "listaMedicos");
+        conectarDatalist("campoEspecialidadeMedicoNome", "campoMcampoEspecialidadeMedicoIdedicoId", "listaMedicos");
     </script>
 
 </body>
