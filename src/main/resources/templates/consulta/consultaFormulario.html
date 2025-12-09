@@ -149,6 +149,20 @@
                     <label>Paciente</label>
                 </div>
 
+                <!-- Especialidade -->
+                <div class="form-control">
+                    <input list="listaEspecialidade" id="campoEspecialidadeMedicoNome" placeholder=" " required />
+                    <input type="hidden" id="campoEspecialidadeMedicoId" name="medico" th:field="*{medico}" />
+
+                    <datalist id="listaEspecialidade">
+                        <option th:each="m : ${medicos}" 
+                                th:value="${m.especialidadeMedico}" 
+                                th:data-id="${m.idMedico}">
+                        </option>
+                    </datalist>
+                    <label>Especialidade</label>
+                </div>
+
                 <!-- Médico -->
                 <div class="form-control">
                     <input list="listaMedicos" id="campoMedicoNome" placeholder=" " required />
@@ -163,20 +177,11 @@
                     <label>Médico</label>
                 </div>
 
-                <!-- Especialidade -->
-                <div class="form-control">
-                    <input list="listaMedicos" id="campoEspecialidadeMedicoNome" placeholder=" " required />
-                    <input type="hidden" id="campoEspecialidadeMedicoId" name="medico" th:field="*{medico}" />
+                <button type="submit" value="salvar" class="btn">Salvar</button>
 
-                    <datalist id="listaEspecialidade">
-                        <option th:each="m : ${medicos}" 
-                                th:value="${m.especialidadeMedico}" 
-                                th:data-id="${m.idMedico}">
-                        </option>
-                    </datalist>
-                    <label>Especialidade</label>
+                <div class="back-link">
+                    <a href="/medico">Voltar</a>
                 </div>
-
             </form>
 
         </div>
@@ -201,7 +206,7 @@
 
         conectarDatalist("campoPacienteNome", "campoPacienteId", "listaClientes");
         conectarDatalist("campoMedicoNome", "campoMedicoId", "listaMedicos");
-        conectarDatalist("campoEspecialidadeMedicoNome", "campoMcampoEspecialidadeMedicoIdedicoId", "listaMedicos");
+        conectarDatalist("campoEspecialidadeMedicoNome", "campoEspecialidadeMedicoId", "listaMedicos");
     </script>
 
 </body>
