@@ -12,21 +12,21 @@ import br.com.sistemamedico.medico.repository.MedicoRepository;
 public class MedicoService {
     
     @Autowired
-    private MedicoRepository repository;
+    private MedicoRepository medicoRepository;
 
     public Medico save(Medico medico){
-        return repository.save(medico);
+        return medicoRepository.save(medico);
     }
 
     public List<Medico> findAll(){
-        return repository.findAll();
+        return medicoRepository.findAll();
     }
 
     public Medico findById(Integer id){
-        return repository.findById(id).orElse(null);
+        return medicoRepository.findById(id).orElse(null);
     }
 
     public void deleteById(Integer id){
-        repository.deleteById(id);
+        medicoRepository.deleteById(id);
     }
 }

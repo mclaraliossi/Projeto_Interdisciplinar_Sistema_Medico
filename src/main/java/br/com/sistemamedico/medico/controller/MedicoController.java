@@ -20,11 +20,11 @@ import br.com.sistemamedico.medico.service.MedicoService;
 public class MedicoController {
     
     @Autowired
-    private MedicoService service;
+    private MedicoService medicoService;
 
     @GetMapping("/listar")
     public String Listar(Model model){
-        List<Medico> medicos = service.findAll();
+        List<Medico> medicos = medicoService.findAll();
         model.addAttribute("medicos", medicos);
         return "medico/medicoListar";
     }
@@ -37,20 +37,20 @@ public class MedicoController {
 
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Medico medico){
-        service.save(medico);
+        medicoService.save(medico);
         return "redirect:/medicos/listar";
     }
 
     @GetMapping("/editar/{id}")
     public String editarForm(@PathVariable Integer id, Model model){
-        Medico medico = service.findById(id);
+        Medico medico = medicoService.findById(id);
         model.addAttribute("medico", medico);
         return "medico/medicoFormulario";
     }
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable Integer id){
-        service.deleteById(id);
+        medicoService.deleteById(id);
         return "redirect:/medicos/listar";
     }
 }
