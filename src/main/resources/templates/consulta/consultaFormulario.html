@@ -102,6 +102,21 @@
             background-color: #D9D9D9;
             color: white;
         }
+         /* O link Voltar */
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-link a {
+            color: #7ABFBF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 
 </head>
@@ -177,6 +192,13 @@
                     <label>Especialidade</label>
                 </div>
 
+                <button type="submit" value="salvar" class="btn">Salvar</button>
+
+                <div class="back-link">
+                    <a href="/medico">Voltar</a>
+                </div>
+
+
             </form>
 
         </div>
@@ -201,7 +223,7 @@
 
         conectarDatalist("campoPacienteNome", "campoPacienteId", "listaClientes");
         conectarDatalist("campoMedicoNome", "campoMedicoId", "listaMedicos");
-        conectarDatalist("campoEspecialidadeMedicoNome", "campoMcampoEspecialidadeMedicoIdedicoId", "listaMedicos");
+        conectarDatalist("campoEspecialidadeMedicoNome", "campoEspecialidadeMedicoId", "listaMedicos");
     </script>
 
 </body>

@@ -11,15 +11,17 @@
 </head>
 <body>
 
-    <h1 style="text-align: center;">Sistema Clínica Médica</h1>
-    <div style="text-align: center;">
-        <form action="/login" method="get" style="display: inline;">
-            <button type="submit">Login</button>
-        </form>
-        <form action="/usuarios/criar" method="get" style="display: inline;">
-            <button type="submit">Cadastre-se</button>
-        </form>
+  <div class="container">
+    <div>
+        <h1>Sistema Médico</h1>
     </div>
+    <div>
+        <h3><a href="/medicos/listar"> Médicos </a></h3>
+        <h3><a href="/consultas/listar"> Consultas </a></h3>
+        <h3><a href="/clientes/listar"> Clientes </a></h3>
+        <h3><a href="/consultas/listar-nome-medico"> Agendamentos </a></h3>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
