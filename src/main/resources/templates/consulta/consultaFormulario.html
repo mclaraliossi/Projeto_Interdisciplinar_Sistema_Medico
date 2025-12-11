@@ -88,6 +88,12 @@
             padding: 0 4px;
         }
 
+        .form-control.filled label {
+        top: -8px;
+        left: 5px;
+        padding: 0 4px;
+    }
+
         .btn {
             background-color: #7ABFBF;
             border: none;
@@ -151,7 +157,7 @@
 
                 <!-- Médico -->
                  
-                 <div class="form-control">
+                <div class="form-control">
                 <input list="listaMedicos" id="campoMedicoNome" placeholder=" " required />
                 <input type="hidden" id="campoMedicoId" th:field="*{medico}" />
 
@@ -166,39 +172,11 @@
                 <label>Médico</label>
             </div>
 
-                <!-- <div class="form-control">
-                    <input list="listaMedicos" id="campoMedicoNome" placeholder=" " required />
-                    <input type="hidden" id="campoMedicoId" name="medico" th:field="*{medico}" />
-
-                    <datalist id="listaMedicos">
-                        <option th:each="m : ${medicos}" 
-                                th:value="${m.nomeMedico}" 
-                                th:data-id="${m.idMedico}">
-                        </option>
-                    </datalist>
-                    <label>Médico</label>
-                </div> -->
-                
-                <!-- Especialidade -->
-                <div class="form-control">
-                    <input type="text" id="campoEspecialidadeMedico" placeholder=" " readonly />
-                    <label>Especialidade</label>
-                </div>
-
-                <!-- <div class="form-control">
-                    <input list="listaEspecialidade" id="campoEspecialidadeMedicoNome" placeholder=" " required />
-                    <input type="hidden" id="campoEspecialidadeMedicoId" name="medico" th:field="*{medico}" />
-
-                    <datalist id="listaEspecialidade">
-                        <option th:each="m : ${medicos}" 
-                                th:value="${m.especialidadeMedico}" 
-                                th:data-id="${m.idMedico}">
-                        </option>
-                    </datalist>
-                    <label>Especialidade</label>
-                </div> -->
-
-
+            <!-- Especialidade -->
+            <div class="form-control">
+                <input type="text" id="campoEspecialidadeMedico" placeholder=" " readonly />
+                <label>Especialidade</label>
+            </div>
 
                 <button type="submit" value="salvar" class="btn">Salvar</button>
 
@@ -218,17 +196,34 @@
             const campoId = document.getElementById(inputIdId);
             const lista = document.getElementById(datalistId);
 
+            function atualizarAnimacao() {
+                if (campoNome.value.trim() !== "") {
+                    campoNome.parentElement.classList.add("filled");
+                } else {
+                    campoNome.parentElement.classList.remove("filled");
+                }
+            }
+
             campoNome.addEventListener("input", function () {
                 const nome = this.value;
-
                 const opt = Array.from(lista.options).find(o => o.value === nome);
 
-                campoId.value = opt ? opt.dataset.id : "";
+                if (opt) {
+                    campoId.value = opt.dataset.id;
+                } else {
+                    campoId.value = "";
+                }
+
+                atualizarAnimacao(); // garante animação
             });
+
+            campoNome.addEventListener("blur", atualizarAnimacao); // animação mesmo sem datalist
         }
+
 
         conectarDatalist("campoPacienteNome", "campoPacienteId", "listaClientes");
         conectarDatalist("campoMedicoNome", "campoMedicoId", "listaMedicos");
+
 
 
         
