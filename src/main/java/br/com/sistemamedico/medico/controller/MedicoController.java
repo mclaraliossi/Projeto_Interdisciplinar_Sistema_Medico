@@ -54,11 +54,12 @@ public class MedicoController {
         return "redirect:/medicos/listar";
     }
 
-    @GetMapping("/perfil/{id}")
-    public String perfilMedico(@PathVariable Integer id, Model model) {
-        Medico medico = service.findById(id);
-        model.addAttribute("medico", medico);
-        return "medico/medicoPerfil"; // sua página de perfil
+    @GetMapping("/perfil/{id}") 
+    public String perfilMedico(@PathVariable Integer id, Model model) { 
+        Medico medico = medicoService.findById(id); 
+        model.addAttribute("medico", medico); 
+        return "medico/medicoPerfil"; 
     }
+    
 
 }
