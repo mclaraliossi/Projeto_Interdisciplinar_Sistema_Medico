@@ -102,21 +102,6 @@
             background-color: #D9D9D9;
             color: white;
         }
-         /* O link Voltar */
-        .back-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .back-link a {
-            color: #7ABFBF;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 
 </head>
@@ -164,22 +149,24 @@
                     <label>Paciente</label>
                 </div>
 
-                <!-- Especialidade -->
-                <div class="form-control">
-                    <input list="listaEspecialidade" id="campoEspecialidadeMedicoNome" placeholder=" " required />
-                    <input type="hidden" id="campoEspecialidadeMedicoId" name="medico" th:field="*{medico}" />
-
-                    <datalist id="listaEspecialidade">
-                        <option th:each="m : ${medicos}" 
-                                th:value="${m.especialidadeMedico}" 
-                                th:data-id="${m.idMedico}">
-                        </option>
-                    </datalist>
-                    <label>Especialidade</label>
-                </div>
-
                 <!-- Médico -->
-                <div class="form-control">
+                 
+                 <div class="form-control">
+                <input list="listaMedicos" id="campoMedicoNome" placeholder=" " required />
+                <input type="hidden" id="campoMedicoId" th:field="*{medico}" />
+
+                <datalist id="listaMedicos">
+                    <option th:each="m : ${medicos}" 
+                            th:value="${m.nomeMedico}"
+                            th:data-id="${m.idMedico}"
+                            th:data-especialidade="${m.especialidadeMedico}">
+                    </option>
+                </datalist>
+
+                <label>Médico</label>
+            </div>
+
+                <!-- <div class="form-control">
                     <input list="listaMedicos" id="campoMedicoNome" placeholder=" " required />
                     <input type="hidden" id="campoMedicoId" name="medico" th:field="*{medico}" />
 
@@ -190,14 +177,34 @@
                         </option>
                     </datalist>
                     <label>Médico</label>
+                </div> -->
+                
+                <!-- Especialidade -->
+                <div class="form-control">
+                    <input type="text" id="campoEspecialidadeMedico" placeholder=" " readonly />
+                    <label>Especialidade</label>
                 </div>
+
+                <!-- <div class="form-control">
+                    <input list="listaEspecialidade" id="campoEspecialidadeMedicoNome" placeholder=" " required />
+                    <input type="hidden" id="campoEspecialidadeMedicoId" name="medico" th:field="*{medico}" />
+
+                    <datalist id="listaEspecialidade">
+                        <option th:each="m : ${medicos}" 
+                                th:value="${m.especialidadeMedico}" 
+                                th:data-id="${m.idMedico}">
+                        </option>
+                    </datalist>
+                    <label>Especialidade</label>
+                </div> -->
+
+
 
                 <button type="submit" value="salvar" class="btn">Salvar</button>
 
                 <div class="back-link">
                     <a href="/medico">Voltar</a>
                 </div>
-
             </form>
 
         </div>
