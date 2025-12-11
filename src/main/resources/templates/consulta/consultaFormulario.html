@@ -229,7 +229,35 @@
 
         conectarDatalist("campoPacienteNome", "campoPacienteId", "listaClientes");
         conectarDatalist("campoMedicoNome", "campoMedicoId", "listaMedicos");
-        conectarDatalist("campoEspecialidadeMedicoNome", "campoEspecialidadeMedicoId", "listaMedicos");
+
+
+        
+        document.addEventListener("DOMContentLoaded", function () {
+        
+            const campoMedicoNome = document.getElementById("campoMedicoNome");
+            const campoMedicoId = document.getElementById("campoMedicoId");
+            const campoEspecialidade = document.getElementById("campoEspecialidadeMedico");
+            const listaMedicos = document.getElementById("listaMedicos");
+        
+            campoMedicoNome.addEventListener("input", function () {
+                const valor = this.value;
+        
+                // procura o option correspondente
+                const option = Array.from(listaMedicos.options)
+                    .find(opt => opt.value === valor);
+        
+                if (option) {
+                    campoMedicoId.value = option.dataset.id;
+                    campoEspecialidade.value = option.dataset.especialidade;
+                } else {
+                    // limpa caso digite algo inválido
+                    campoMedicoId.value = "";
+                    campoEspecialidade.value = "";
+                }
+            });
+        
+        });
+            
     </script>
 
 </body>
