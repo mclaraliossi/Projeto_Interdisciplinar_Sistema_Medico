@@ -37,28 +37,7 @@ public class ClienteController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Cliente cliente,
-            @RequestParam(value = "fotoPerfil", required = false) MultipartFile file) {
-
-        try {
-            if (!file.isEmpty()) {
-                String folder = "fotos/";
-                String caminho = folder + file.getOriginalFilename();
-
-                // Cria pasta caso não exista
-                java.nio.file.Files.createDirectories(java.nio.file.Paths.get(folder));
-
-                // Salva a imagem na pasta
-                java.nio.file.Path path = java.nio.file.Paths.get(caminho);
-                file.transferTo(path.toFile());
-
-                // Salva no banco apenas o caminho
-                cliente.setFotoCliente(caminho);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public String salvar(@ModelAttribute Cliente cliente) {
         clienteService.save(cliente);
         return "redirect:/clientes/listar";
     }
@@ -76,10 +55,4 @@ public class ClienteController {
         return "redirect:/clientes/listar";
     }
 
-    // @GetMapping("/perfil/{id}") 
-    // public String perfilCliente(@PathVariable Integer id, Model model) { 
-    //     Cliente cliente = clienteService.findById(id); 
-    //     model.addAttribute("cliente", cliente); 
-    //     return "cliente/clientePerfil"; 
-    // }
 }

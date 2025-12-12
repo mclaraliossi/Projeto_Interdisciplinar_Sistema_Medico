@@ -9,7 +9,7 @@
 
     <style>
         body {
-            background-color: #A3D9D3;
+            background-color: #BDDEF2;
             font-family: "Poppins", sans-serif;
             padding: 40px 0;
             text-align: center;
@@ -20,10 +20,13 @@
             background-color: #fff;
             border-radius: 15px;
             overflow: hidden;
-            max-width: 1200px;
+            max-width: 1500px;
             margin: auto;
         }
 
+        .img{
+            width: 100%;
+        }
         .left-side {
             background-color: #fff;
             width: 40%;
@@ -36,7 +39,7 @@
         }
 
         .left-side h1 {
-            color: #7ABFBF;
+            color: #4988BF;
             font-weight: 600;
             margin-bottom: 25px;
         }
@@ -57,7 +60,7 @@
 
         thead tr {
             border-radius: 15px;
-            background-color: #7ABFBF;
+            background-color: #4988BF;
             color: white;
             font-weight: bold;
         }
@@ -69,7 +72,7 @@
 
         a.btn-custom {
             padding: 6px 14px;
-            background: #7ABFBF;
+            background: #4988BF;
             color: white;
             text-decoration: none;
             border-radius: 12px;
@@ -78,14 +81,14 @@
         }
 
         a.btn-custom:hover {
-            background-color: #569f9f;
+            background-color: #F25116;
         }
 
         .actions a {
             margin: 0 5px;
             font-weight: 500;
             text-decoration: none;
-            color: #7ABFBF;
+            color: #4988BF;
         }
 
         .actions a:hover {
@@ -97,7 +100,7 @@
         }
 
         .back-link a {
-            color: #7ABFBF;
+            color: #4988BF;
             text-decoration: none;
             font-weight: 500;
         }
@@ -113,7 +116,7 @@
     <div class="left-side">
       <h1><i class="bi bi-clipboard2-pulse-fill">Lista de Médicos</i></h1>
       <a href="/medicos/criar" class="btn-custom">Cadastrar Médico</a>
-      <img src="https://images.vexels.com/media/users/3/205375/isolated/preview/dd2351d6be1c86b8f993484bda92fb13-ilustracao-do-vaso-preto-de-planta-de-casa.png" alt="">
+      <img class="img" src="https://static.vecteezy.com/system/resources/previews/033/030/282/non_2x/electronic-health-record-new-technology-to-replace-paper-clinical-data-medical-treatment-history-application-flat-modern-illustration-vector.jpg" alt="">
     </div>
 
      <div class="table-container">
@@ -135,7 +138,6 @@
                     <td class="actions">
                         <a th:href="@{/medicos/editar/{id}(id=${medico.idMedico})}">Editar</a>
                         <a th:href="@{/medicos/excluir/{id}(id=${medico.idMedico})}">Excluir</a>
-                        <a th:href="@{/medicos/perfil/{id}(id=${medico.idMedico})}">Perfil</a>
                     </td>
                 </tr>
             </tbody>

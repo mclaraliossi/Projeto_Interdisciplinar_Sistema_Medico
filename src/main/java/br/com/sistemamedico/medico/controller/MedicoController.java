@@ -53,13 +53,5 @@ public class MedicoController {
         medicoService.deleteById(id);
         return "redirect:/medicos/listar";
     }
-
-    @GetMapping("/perfil/{id}") 
-    public String perfilMedico(@PathVariable Integer id, Model model) { 
-        Medico medico = medicoService.findById(id); 
-        model.addAttribute("medico", medico); 
-        return "medico/medicoPerfil"; 
-    }
     
-
 }
