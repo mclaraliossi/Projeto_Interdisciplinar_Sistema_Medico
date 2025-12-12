@@ -38,11 +38,11 @@ public class ClienteController {
 
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Cliente cliente,
-            @RequestParam("fotoPerfil") MultipartFile file) {
+            @RequestParam(value = "fotoPerfil", required = false) MultipartFile file) {
 
         try {
             if (!file.isEmpty()) {
-                String folder = "uploads/fotos/";
+                String folder = "fotos/";
                 String caminho = folder + file.getOriginalFilename();
 
                 // Cria pasta caso não exista
