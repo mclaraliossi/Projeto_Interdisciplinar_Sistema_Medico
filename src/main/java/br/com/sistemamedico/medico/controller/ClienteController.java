@@ -75,4 +75,11 @@ public class ClienteController {
         clienteService.deleteById(id);
         return "redirect:/clientes/listar";
     }
+
+    // @GetMapping("/perfil/{id}") 
+    // public String perfilCliente(@PathVariable Integer id, Model model) { 
+    //     Cliente cliente = clienteService.findById(id); 
+    //     model.addAttribute("cliente", cliente); 
+    //     return "cliente/clientePerfil"; 
+    // }
 }
